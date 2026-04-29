@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Little Explorers Ko Samui – Kita</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g1:#1b4332;--g2:#2d6a4f;--g3:#40916c;--g4:#52b788;--g5:#95d5b2;
+  --sand:#fdf6ec;--sand2:#f5e6cc;--warm:#e9c46a;--coral:#e76f51;--sky:#caf0f8;
+  --dark:#0d2117;--text:#1c3829;--muted:#4a7060;--white:#fefdf8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--sand)}
+::-webkit-scrollbar-thumb{background:var(--g3);border-radius:3px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 3.5rem;
+  background:rgba(254,253,248,.95);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(27,67,50,.1);
+  animation:fadeDown .5s ease both;
+}
+.nav-logo{display:flex;align-items:center;gap:.7rem}
+.nav-logo-mark{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--g1),var(--g4));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--g1)}
+.nav-logo-text span{color:var(--coral)}
+nav ul{list-style:none;display:flex;gap:1.6rem;align-items:center;flex-wrap:wrap}
+nav ul a{text-decoration:none;color:var(--text);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;transition:color .2s}
+nav ul a:hover{color:var(--g3)}
+.nav-btn{
+  background:var(--g1);color:var(--white) !important;
+  padding:.5rem 1.3rem;border-radius:2rem;
+  transition:background .2s,transform .15s !important;
+}
+.nav-btn:hover{background:var(--g2) !important;transform:translateY(-1px)}
+
+/* HERO */
+.hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:flex;align-items:center;
+  background:linear-gradient(150deg,var(--g1) 0%,var(--g2) 50%,#1a4a35 100%);
+  padding:7rem 3.5rem 5rem;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1800&q=80') center/cover no-repeat;
+  opacity:.18;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 50%,rgba(82,183,136,.15) 0%,transparent 60%);
+}
+.hero-wave{position:absolute;bottom:-1px;left:0;right:0}
+.hero-content{position:relative;z-index:2;max-width:720px;animation:fadeUp .9s .2s ease both}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(233,196,106,.15);border:1px solid rgba(233,196,106,.4);
+  color:var(--warm);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:.4rem 1rem;border-radius:2rem;margin-bottom:1.8rem;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,7vw,5.5rem);color:#fff;
+  line-height:1.05;font-weight:600;margin-bottom:1.3rem;
+}
+.hero h1 em{color:var(--warm);font-style:italic}
+.hero-sub{font-size:1.1rem;color:rgba(255,255,255,.78);line-height:1.8;max-width:540px;margin-bottom:2.8rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-hero{
+  background:var(--coral);color:#fff;
+  padding:.9rem 2.4rem;border-radius:3rem;
+  text-decoration:none;font-weight:600;font-size:.9rem;letter-spacing:.04em;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 10px 30px rgba(231,111,81,.4);
+}
+.btn-hero:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(231,111,81,.5)}
+.btn-ghost{
+  border:1.5px solid rgba(255,255,255,.5);color:#fff;
+  padding:.9rem 2.4rem;border-radius:3rem;
+  text-decoration:none;font-weight:500;font-size:.9rem;
+  transition:border-color .2s,background .2s;
+}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+.hero-stats{
+  position:absolute;bottom:3rem;right:3.5rem;z-index:2;
+  display:flex;gap:2rem;animation:fadeUp 1s .5s ease both;
+}
+.stat{text-align:center}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--warm);line-height:1}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase;margin-top:.3rem}
+
+/* COMMON */
+.section{padding:6rem 3.5rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.tag{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g4);font-weight:600;margin-bottom:.8rem}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,2.9rem);color:var(--dark);line-height:1.15;margin-bottom:1.2rem}
+.lead{font-size:1.05rem;color:var(--muted);line-height:1.85;max-width:600px}
+
+/* LEITBILD / ÜBER */
+.about{background:var(--sand)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.about-visual{position:relative}
+.about-img{
+  width:100%;border-radius:1.5rem;overflow:hidden;height:420px;
+  background:linear-gradient(135deg,var(--g1),var(--g3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:6rem;
+}
+.about-badge{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--coral);color:#fff;
+  padding:1.2rem 1.6rem;border-radius:1rem;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1rem;line-height:1.4;max-width:220px;
+  box-shadow:0 12px 36px rgba(231,111,81,.35);
+}
+blockquote{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.4rem;color:var(--g1);line-height:1.65;
+  border-left:3px solid var(--warm);padding-left:1.5rem;
+  margin:1.5rem 0 2rem;
+}
+.value-list{list-style:none;display:flex;flex-direction:column;gap:.8rem;margin-top:1.5rem}
+.value-list li{display:flex;align-items:center;gap:.8rem;font-size:.95rem;color:var(--text)}
+.value-dot{width:8px;height:8px;border-radius:50%;background:var(--g4);flex-shrink:0}
+
+/* STANDORT */
+.standort-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start}
+.info-box{background:var(--sand);border-radius:1.2rem;padding:2rem;border:1px solid rgba(27,67,50,.08)}
+.info-box h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:1rem;color:var(--dark)}
+.info-row{display:flex;gap:1rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid rgba(27,67,50,.08)}
+.info-row:last-child{border-bottom:none}
+.info-icon{font-size:1.1rem;margin-top:.1rem;width:24px;flex-shrink:0}
+.info-row p{font-size:.92rem;color:var(--muted);line-height:1.6}
+.info-row strong{color:var(--text)}
+.map-box{
+  border-radius:1.2rem;overflow:hidden;height:100%;min-height:320px;
+  background:linear-gradient(135deg,var(--g1) 0%,var(--g3) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#fff;text-align:center;gap:1rem;padding:2rem;
+}
+.map-box .big-icon{font-size:3.5rem}
+.map-box h4{font-family:'Cormorant Garamond',serif;font-size:1.5rem}
+.map-box p{font-size:.9rem;opacity:.85;max-width:240px;line-height:1.6}
+.map-link{
+  background:rgba(255,255,255,.2);color:#fff;padding:.6rem 1.4rem;border-radius:2rem;
+  text-decoration:none;font-size:.85rem;margin-top:.5rem;transition:background .2s;display:inline-block;
+}
+.map-link:hover{background:rgba(255,255,255,.3)}
+
+/* RÄUME */
+.raeume{background:var(--sand)}
+.raum-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.raum-card{
+  background:var(--white);border-radius:1.2rem;overflow:hidden;
+  border:1px solid rgba(27,67,50,.08);
+  transition:transform .25s,box-shadow .25s;
+}
+.raum-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(27,67,50,.12)}
+.raum-visual{height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.raum-body{padding:1.4rem}
+.raum-body h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.5rem;color:var(--dark)}
+.raum-body p{font-size:.88rem;color:var(--muted);line-height:1.65}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.team-card{
+  background:var(--white);border-radius:1.2rem;padding:2rem;text-align:center;
+  border:1px solid rgba(27,67,50,.08);
+  transition:transform .25s,box-shadow .25s;
+}
+.team-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(27,67,50,.1)}
+.avatar{
+  width:70px;height:70px;border-radius:50%;margin:0 auto 1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:#fff;
+}
+.team-card h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:.3rem;color:var(--dark)}
+.role-tag{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g4);font-weight:600;margin-bottom:.8rem}
+.team-card p{font-size:.87rem;color:var(--muted);line-height:1.65}
+
+/* TAGESABLAUF */
+.tagesablauf{background:var(--dark);position:relative;overflow:hidden}
+.tagesablauf::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(82,183,136,.08) 0%,transparent 60%);
+}
+.tagesablauf .tag{color:var(--g5)}
+.tagesablauf h2{color:#fff}
+.timeline{position:relative;margin-top:3rem;display:flex;flex-direction:column;gap:0}
+.timeline::before{
+  content:'';position:absolute;left:90px;top:0;bottom:0;
+  width:1px;background:rgba(82,183,136,.2);
+}
+.tl-item{display:flex;gap:2rem;align-items:flex-start;padding:1.5rem 0}
+.tl-time{
+  min-width:90px;text-align:right;
+  font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;
+  color:var(--warm);padding-top:.1rem;flex-shrink:0;
+}
+.tl-dot{
+  width:12px;height:12px;border-radius:50%;background:var(--g4);
+  flex-shrink:0;margin-top:.3rem;position:relative;z-index:1;
+  box-shadow:0 0 0 3px rgba(82,183,136,.2);
+}
+.tl-content h4{font-size:.95rem;font-weight:600;color:#fff;margin-bottom:.3rem}
+.tl-content p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.6}
+
+/* PÄDAGOGIK */
+.paed-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3.5rem}
+.konzept-list{display:flex;flex-direction:column;gap:1.2rem;margin-top:1.5rem}
+.konzept-item{
+  display:flex;gap:1.2rem;align-items:flex-start;
+  padding:1.2rem;background:var(--sand);border-radius:.9rem;
+  border:1px solid rgba(27,67,50,.06);
+  transition:transform .2s;
+}
+.konzept-item:hover{transform:translateX(4px)}
+.konzept-icon{
+  width:40px;height:40px;border-radius:.6rem;flex-shrink:0;
+  background:linear-gradient(135deg,var(--g1),var(--g3));
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.konzept-item h4{font-size:.95rem;font-weight:600;color:var(--dark);margin-bottom:.3rem}
+.konzept-item p{font-size:.87rem;color:var(--muted);line-height:1.6}
+.bild-vom-kind{
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  border-radius:1.5rem;padding:2.5rem;color:#fff;
+}
+.bild-vom-kind h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:1rem}
+.bild-vom-kind p{font-size:.95rem;line-height:1.85;color:rgba(255,255,255,.82);margin-bottom:1rem}
+.bild-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}
+.bild-tag{
+  background:rgba(255,255,255,.12);color:#fff;
+  padding:.4rem .9rem;border-radius:2rem;font-size:.82rem;
+  border:1px solid rgba(255,255,255,.2);
+}
+
+/* VORSCHULE */
+.vorschul{background:var(--sand)}
+.vorschul-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
+.vs-card{
+  background:var(--white);border-radius:1rem;padding:1.8rem;
+  border:1px solid rgba(27,67,50,.08);
+  transition:transform .25s,box-shadow .25s;
+  display:flex;gap:1.2rem;align-items:flex-start;
+}
+.vs-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(27,67,50,.1)}
+.vs-icon{font-size:1.8rem;flex-shrink:0}
+.vs-card h3{font-family:'Cormorant Garamond',serif;font-size:1.05rem;margin-bottom:.5rem;color:var(--dark)}
+.vs-card p{font-size:.87rem;color:var(--muted);line-height:1.65}
+
+/* GRUPPEN/ELTERN */
+.gruppen-eltern{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem}
+.ge-box{
+  background:var(--sand);border-radius:1.2rem;padding:2.5rem;
+  border:1px solid rgba(27,67,50,.08);
+}
+.ge-box h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1rem;color:var(--dark)}
+.ge-box p{font-size:.93rem;color:var(--muted);line-height:1.8;margin-bottom:1rem}
+.ge-box ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.ge-box ul li{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:var(--text);line-height:1.5}
+.ge-box ul li::before{content:'🌿';font-size:.8rem;flex-shrink:0}
+
+/* KOOPERATION */
+.koop{background:var(--dark);position:relative}
+.koop .tag{color:var(--g5)}
+.koop h2{color:#fff}
+.koop .lead{color:rgba(255,255,255,.6)}
+.koop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.koop-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(82,183,136,.15);
+  border-radius:1rem;padding:1.8rem;
+  transition:background .25s,border-color .25s;
+}
+.koop-card:hover{background:rgba(255,255,255,.08);border-color:rgba(82,183,136,.35)}
+.koop-card .koop-icon{font-size:2rem;margin-bottom:1rem}
+.koop-card h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;margin-bottom:.5rem}
+.koop-card p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.65}
+
+/* ZEITEN & KOSTEN */
+.zeiten-kosten-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:3.5rem;margin-top:3rem;align-items:start}
+.zeiten-box h3,.kosten-box h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--dark);margin-bottom:1.5rem}
+.time-row{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;border-bottom:1px dashed rgba(27,67,50,.15);font-size:.93rem}
+.time-row .day{font-weight:500}
+.time-row .hrs{color:var(--g3);font-weight:600;text-align:right}
+.cost-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.cost-table th{text-align:left;padding:.85rem .8rem;background:var(--g1);color:#fff;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.cost-table th:first-child{border-radius:.6rem 0 0 0}
+.cost-table th:last-child{border-radius:0 .6rem 0 0}
+.cost-table td{padding:.7rem .8rem;font-size:.87rem;border-bottom:1px solid rgba(27,67,50,.08)}
+.cost-table tr:nth-child(even) td{background:var(--sand)}
+.cost-note{
+  margin-top:1.2rem;font-size:.85rem;color:var(--muted);
+  background:rgba(82,183,136,.1);padding:1rem 1.2rem;
+  border-radius:.7rem;border-left:3px solid var(--g4);line-height:1.7;
+}
+
+/* SONSTIGES BOXEN */
+.sonstiges{background:var(--sand)}
+.son-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.3rem;margin-top:3rem}
+.son-card{
+  background:var(--white);border-radius:1.1rem;padding:1.8rem;
+  border:1px solid rgba(27,67,50,.08);
+  transition:transform .25s,box-shadow .25s;
+}
+.son-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(27,67,50,.1)}
+.son-card .si{font-size:1.8rem;margin-bottom:.8rem}
+.son-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.6rem;color:var(--dark)}
+.son-card p{font-size:.88rem;color:var(--muted);line-height:1.7}
+
+/* HSV BADGE */
+.hsv-section{
+  background:linear-gradient(135deg,#1b4332 0%,#0d2117 100%);
+  position:relative;overflow:hidden;
+}
+.hsv-section::before{
+  content:'⚽';position:absolute;font-size:30rem;opacity:.04;
+  right:-3rem;top:50%;transform:translateY(-50%);
+}
+.hsv-content{position:relative;z-index:2;text-align:center;max-width:700px;margin:0 auto}
+.hsv-section .tag{color:var(--warm)}
+.hsv-section h2{color:#fff}
+.hsv-section p{color:rgba(255,255,255,.75);line-height:1.85;margin:1rem auto;font-size:1rem}
+.hsv-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(233,196,106,.15);border:1px solid var(--warm);
+  color:var(--warm);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:.5rem 1.2rem;border-radius:2rem;margin-bottom:1.5rem;font-weight:600;
+}
+
+/* KONTAKT */
+.kontakt{background:var(--white)}
+.kontakt-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem}
+.k-item{display:flex;gap:1.2rem;align-items:flex-start;margin-bottom:1.8rem}
+.k-icon{
+  width:46px;height:46px;min-width:46px;border-radius:.75rem;
+  background:var(--g1);display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:#fff;
+}
+.k-item h4{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g4);margin-bottom:.3rem;font-weight:600}
+.k-item p{font-size:.93rem;line-height:1.65}
+.k-item a{color:var(--g2);text-decoration:none}
+.k-item a:hover{text-decoration:underline}
+.contact-cta{
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  border-radius:1.5rem;padding:3rem;color:#fff;
+  display:flex;flex-direction:column;justify-content:space-between;gap:2rem;
+}
+.contact-cta h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;line-height:1.3}
+.contact-cta p{font-size:.93rem;color:rgba(255,255,255,.75);line-height:1.75}
+.cta-btn{
+  display:inline-block;background:var(--warm);color:var(--dark);
+  padding:.85rem 2rem;border-radius:2rem;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+  transition:transform .2s,box-shadow .2s;align-self:flex-start;
+  box-shadow:0 8px 20px rgba(233,196,106,.35);
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(233,196,106,.45)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:3rem 3.5rem;border-top:1px solid rgba(82,183,136,.1)}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#fff}
+.footer-logo span{color:var(--warm)}
+footer p{font-size:.83rem;color:rgba(255,255,255,.4);line-height:1.8}
+
+/* ANIM */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  nav ul{display:none}
+  .section{padding:4rem 1.5rem}
+  .hero{padding:7rem 1.5rem 5rem}
+  .hero-stats{display:none}
+  .about-grid,.paed-grid,.standort-grid,.zeiten-kosten-grid,.kontakt-grid,.gruppen-eltern,.vorschul-grid{grid-template-columns:1fr;gap:2.5rem}
+  .raum-grid,.team-grid,.koop-grid{grid-template-columns:1fr 1fr;gap:1rem}
+  .about-badge{right:0;bottom:-2rem}
+}
+@media(max-width:540px){
+  .raum-grid,.team-grid,.koop-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">🌿</div>
+    <div class="nav-logo-text">Little <span>Explorers</span></div>
+  </div>
+  <ul>
+    <li><a href="#ueber">Leitbild</a></li>
+    <li><a href="#raeume">Räume</a></li>
+    <li><a href="#paedagogik">Pädagogik</a></li>
+    <li><a href="#alltag">Alltag</a></li>
+    <li><a href="#zeiten">Kosten</a></li>
+    <li><a href="#kontakt" class="nav-btn">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <svg class="hero-wave" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 80 C360 0 1080 0 1440 80 L1440 80 L0 80 Z" fill="#fefdf8"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-eyebrow">🌴 Maenam · Ko Samui · Thailand</div>
+    <h1>Little Explorers<br><em>Ko Samui</em></h1>
+    <p class="hero-sub">Eine teiloffene, bilinguale Kindertagesstätte am Strand – Platz für 80 Kinder zwischen 6 Monaten und 7 Jahren, mit eigenem Pool, Strandanleger und HSV-Stützpunkt.</p>
+    <div class="hero-actions">
+      <a href="#ueber" class="btn-hero">Einrichtung entdecken</a>
+      <a href="#kontakt" class="btn-ghost">Anmeldung</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">80</div><div class="stat-label">Plätze</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Gruppen</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Sprachen</div></div>
+  </div>
+</section>
+
+<!-- LEITBILD / TRÄGER -->
+<section class="section about" id="ueber">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Name, Träger & Leitbild</div>
+      <h2>Unsere Einrichtung</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-img">🌺</div>
+        <div class="about-badge">"Jedes Kind ist von Natur aus neugierig und kompetent."</div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="tag">Träger</div>
+        <p style="font-size:.95rem;color:var(--muted);margin-bottom:.5rem;line-height:1.7">
+          <strong style="color:var(--dark)">Little Explorers gGmbH</strong> – Privater Träger mit anteiliger staatlicher Förderung durch das Thai-Bildungsministerium. Als privater Träger haben wir die Möglichkeit, einen höheren Betreuungsschlüssel als staatliche Kindergärten anzubieten.
+        </p>
+        <blockquote>„Wir begleiten Kinder dabei, die Welt mit allen Sinnen zu entdecken."</blockquote>
+        <p style="font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem">
+          Unsere Kita steht für ein <strong>teiloffenes, bilinguales Konzept</strong>, da uns die Orientierung der Kinder in ihrer Entwicklung wichtig ist. Wir möchten Kinder in ihren verschiedenen Entwicklungsphasen ansprechen und ihnen die Möglichkeit geben, ihre Umgebung zu erforschen.
+        </p>
+        <ul class="value-list">
+          <li><span class="value-dot"></span>Teiloffenes Konzept mit Reggio-Einflüssen</li>
+          <li><span class="value-dot"></span>Trilinguale Begleitung (Deutsch, Englisch, Thai)</li>
+          <li><span class="value-dot"></span>Inklusion als Grundhaltung</li>
+          <li><span class="value-dot"></span>Naturnahe Förderung am Meer</li>
+          <li><span class="value-dot"></span>Höchste Kinderschutzstandards (§ 8a SGB VIII)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDORT -->
+<section class="section" id="standort">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Adresse & Erreichbarkeit</div>
+      <h2>So findet ihr uns</h2>
+    </div>
+    <div class="standort-grid">
+      <div class="reveal reveal-delay-1">
+        <div class="info-box">
+          <h3>📍 Adresse & Anreise</h3>
+          <div class="info-row">
+            <span class="info-icon">🏠</span>
+            <p><strong>Maenam Beach Road 47</strong><br>Maenam, Ko Samui<br>Surat Thani 84330, Thailand</p>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🚌</span>
+            <p><strong>Kita-Bus:</strong> Eigener Bus mit Fahrdienstmitarbeitern für Kinder aus entfernteren Inselteilen.</p>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🛺</span>
+            <p><strong>TukTuk:</strong> Bringdienst auf Anfrage aus der näheren Umgebung.</p>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">⛵</span>
+            <p><strong>Kita-Boot / JetSki:</strong> Eigener Strandanleger – Anreise direkt über das Wasser möglich.</p>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🚲</span>
+            <p><strong>Fahrrad:</strong> Fahrradständer und -verleih direkt vor Ort.</p>
+          </div>
+        </div>
+      </div>
+      <div class="map-box reveal reveal-delay-2">
+        <div class="big-icon">🌴</div>
+        <h4>Little Explorers Ko Samui</h4>
+        <p>Maenam Beach Road 47<br>Ko Samui 84330, Thailand</p>
+        <a href="https://maps.google.com/?q=Maenam+Ko+Samui" target="_blank" class="map-link">In Google Maps öffnen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM / ANSPRECHPARTNER -->
+<section class="section" id="team" style="background:var(--sand)">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Ansprechpartner</div>
+      <h2>Unsere Leitung</h2>
+      <p class="lead">Drei feste Ansprechpartner für alle Fragen rund um die Einrichtung.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="avatar" style="background:linear-gradient(135deg,#2d6a4f,#e9c46a)">B</div>
+        <h3>Britta Orth</h3>
+        <div class="role-tag">Einrichtungsleitung</div>
+        <p>Dipl.-Sozialpädagogin · Gesamtleitung, Konzeptionsentwicklung, Elterngespräche, Öffentlichkeitsarbeit</p>
+      </div>
+      <div class="team-card reveal reveal-delay-1">
+        <div class="avatar" style="background:linear-gradient(135deg,#1b4332,#52b788)">L</div>
+        <h3>Leon Hildebrands</h3>
+        <div class="role-tag">Stellv. Leitung</div>
+        <p>Staatl. anerk. Erzieher · Gruppenkoordination, päd. Qualitätssicherung, Vertretung der Leitung</p>
+      </div>
+      <div class="team-card reveal reveal-delay-2">
+        <div class="avatar" style="background:linear-gradient(135deg,#40916c,#e76f51)">K</div>
+        <h3>Keno Weber</h3>
+        <div class="role-tag">Verwaltung & HSV-Kooperation</div>
+        <p>Anmeldungen, Elternbeiträge, Organisation, allgemeine Anfragen, Ansprechpartner für die HSV-Kooperation</p>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;background:var(--white);border-radius:1rem;padding:1.5rem 2rem;border:1px solid rgba(27,67,50,.08)" class="reveal">
+      <p style="font-size:.93rem;color:var(--muted);line-height:1.8">
+        <strong style="color:var(--dark)">Weitere Ansprechpartner:</strong> Darüber hinaus stehen den Familien Büromitarbeiter, medizinisches Personal sowie externe Fachkräfte für Sprachförderung, Ergotherapie und Logopädie zur Verfügung.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ZEITEN & KOSTEN -->
+<section class="section" id="zeiten">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Öffnungszeiten & Kosten</div>
+      <h2>Betreuung & Beiträge</h2>
+    </div>
+    <div class="zeiten-kosten-grid">
+      <div class="zeiten-box reveal">
+        <h3>🕐 Öffnungszeiten</h3>
+        <div class="time-row"><span class="day">Frühdienst</span><span class="hrs">07:00 – 07:30</span></div>
+        <div class="time-row"><span class="day">Bringzeit & Morgenkreis</span><span class="hrs">07:30 – 08:45</span></div>
+        <div class="time-row"><span class="day">Frühstück</span><span class="hrs">09:00</span></div>
+        <div class="time-row"><span class="day">Kernzeit</span><span class="hrs">09:30 – 12:00</span></div>
+        <div class="time-row"><span class="day">Mittagessen</span><span class="hrs">12:00 – 13:30</span></div>
+        <div class="time-row"><span class="day">Ruhezeit / Sport</span><span class="hrs">13:00 – 16:00</span></div>
+        <div class="time-row"><span class="day">Abholzeit</span><span class="hrs">12:45 – 16:00</span></div>
+        <div class="time-row"><span class="day">Spätdienst</span><span class="hrs">16:00 – 17:00</span></div>
+        <p style="margin-top:1.2rem;font-size:.85rem;color:var(--muted);line-height:1.7">An thailändischen Feiertagen geschlossen. Schließzeiten werden zu Jahresbeginn bekannt gegeben.</p>
+      </div>
+      <div class="kosten-box reveal reveal-delay-1">
+        <h3>💰 Betreuungskosten</h3>
+        <table class="cost-table">
+          <thead><tr><th>Gruppe</th><th>Alter</th><th>THB / Monat</th><th>EUR / Monat</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Krippe Elefant</strong></td><td>6 M.–3 J.</td><td>18.000</td><td>~470 €</td></tr>
+            <tr><td><strong>Krippe Schildkröte</strong></td><td>6 M.–3 J.</td><td>16.000</td><td>~415 €</td></tr>
+            <tr><td><strong>Tiger / Affe</strong></td><td>3–5 J.</td><td>8.500 / 12.000</td><td>220 / 310 €</td></tr>
+            <tr><td><strong>Vorschule Waran</strong></td><td>5–7 J.</td><td>8.500 / 12.000</td><td>220 / 310 €</td></tr>
+          </tbody>
+        </table>
+        <div class="cost-note">
+          🎉 <strong>Geschwisterrabatt:</strong> 10 % ab dem zweiten Kind.<br>
+          📋 <strong>Aufnahmegebühr:</strong> einmalig 10.000 THB (~260 €).<br>
+          ✅ <strong>Inklusive:</strong> Mahlzeiten aus hauseigener Küche, Snacks, Materialien, alle pädagogischen Angebote, Pool, Strand, Fußballfeld, Nutzgarten.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RÄUMLICHKEITEN -->
+<section class="section raeume" id="raeume">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Räumlichkeiten & Außengelände</div>
+      <h2>Unsere Räume</h2>
+      <p class="lead"><strong>420 m² Innenbereich · 3.000 m² Außengelände.</strong> Im Februar 2025 fertiggestellt, vom Gesundheitsamt abgenommen.</p>
+    </div>
+    <div class="raum-grid">
+      <div class="raum-card reveal">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#b7e4c7,#52b788)">🏡</div>
+        <div class="raum-body">
+          <h3>Gruppenräume</h3>
+          <p>Jede Gruppe hat ihren eigenen Gruppenraum mit Waschraum und Garderobe. Funktionsbereiche sind je nach Bedürfnis und Entwicklungsstand veränderbar.</p>
+        </div>
+      </div>
+      <div class="raum-card reveal reveal-delay-1">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#e0c9b1,#a47551)">🧱</div>
+        <div class="raum-body">
+          <h3>Bauraum</h3>
+          <p>Bausteine, Konstruktionsmaterialien und Magnetbaukästen für kreatives Bauen und technisches Verständnis.</p>
+        </div>
+      </div>
+      <div class="raum-card reveal reveal-delay-2">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#caf0f8,#48cae4)">🔬</div>
+        <div class="raum-body">
+          <h3>Forscherraum</h3>
+          <p>Experimentiertische, Lupen, Mikroskope und Naturmaterialien für kleine Forscher.</p>
+        </div>
+      </div>
+      <div class="raum-card reveal">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#ffd6a5,#e76f51)">🎨</div>
+        <div class="raum-body">
+          <h3>Kunstatelier</h3>
+          <p>Staffeleien, Töpferbereich und Materialien für ästhetische Bildung – Malen, Drucken, Modellieren.</p>
+        </div>
+      </div>
+      <div class="raum-card reveal reveal-delay-1">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#d8f3dc,#74c69d)">🤸</div>
+        <div class="raum-body">
+          <h3>Bewegungsraum</h3>
+          <p>Turnmatten, Klettergerüst, Musikinstrumente, Yoga- und Meditationsbereich für Kinder.</p>
+        </div>
+      </div>
+      <div class="raum-card reveal reveal-delay-2">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#fff3b0,#e9c46a)">📚</div>
+        <div class="raum-body">
+          <h3>Bibliothek</h3>
+          <p>Mehrsprachige Bücher (Deutsch, Englisch, Thai), Leseinseln und gemütliche Rückzugsorte.</p>
+        </div>
+      </div>
+      <div class="raum-card reveal">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#a8dadc,#457b9d)">🍽️</div>
+        <div class="raum-body">
+          <h3>Speisesaal & Küche</h3>
+          <p>Hauseigene Küche und großer Speisesaal mit Platz für alle Kinder – auch für große Feste nutzbar.</p>
+        </div>
+      </div>
+      <div class="raum-card reveal reveal-delay-1">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#caf0f8,#90e0ef)">🏊</div>
+        <div class="raum-body">
+          <h3>Pool & Wasserspielplatz</h3>
+          <p>Eigener Pool mit Schwimmtrainern, Wasserspielplatz und sensorische Bodenbeläge im Außenbereich.</p>
+        </div>
+      </div>
+      <div class="raum-card reveal reveal-delay-2">
+        <div class="raum-visual" style="background:linear-gradient(135deg,#95d5b2,#52b788)">🌱</div>
+        <div class="raum-body">
+          <h3>Nutzgarten</h3>
+          <p>Eigener Nutzgarten – mit Kindern, Gärtner und Hauswirtschaftskräften ökologisch bewirtschaftet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAGESABLAUF -->
+<section class="section tagesablauf" id="alltag">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Tagesablauf</div>
+      <h2 style="color:#fff">Ein Tag bei uns</h2>
+      <p class="lead" style="color:rgba(255,255,255,.6)">Struktur gibt Sicherheit – Freiheit gibt Flügel.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal"><div class="tl-time">07:00</div><div class="tl-dot"></div><div class="tl-content"><h4>🌅 Frühdienst</h4><p>Ruhiger Start in den Tag</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">07:30</div><div class="tl-dot"></div><div class="tl-content"><h4>👋 Reguläre Bringzeit & Morgenkreis</h4><p>Begrüßung und Tagesstart in der Gruppe</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">09:00</div><div class="tl-dot"></div><div class="tl-content"><h4>🍌 Frühstück</h4><p>Gemeinsames Frühstück mit frischen tropischen Früchten</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">09:30</div><div class="tl-dot"></div><div class="tl-content"><h4>🎨 Freispielzeit & Angebote</h4><p>Kleingruppenangebote, Stuhlkreis, Bewegung, Ausflüge, teiloffene Gruppen</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">12:00</div><div class="tl-dot"></div><div class="tl-content"><h4>🍛 Mittagessen Krippe</h4><p>Frisch gekocht aus eigener Küche</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">12:30</div><div class="tl-dot"></div><div class="tl-content"><h4>🍛 Mittagessen Elementar & Vorschule</h4><p>Frisch gekocht aus eigener Küche</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">12:45</div><div class="tl-dot"></div><div class="tl-content"><h4>👋 Gleitende Abholzeit</h4><p>Bis 16:00 Uhr</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">13:00</div><div class="tl-dot"></div><div class="tl-content"><h4>😴 Ruhezeit Krippe</h4><p>Schlafen oder ruhiges Entspannen</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">13:30</div><div class="tl-dot"></div><div class="tl-content"><h4>⚽ Freispielzeit & Sportangebote</h4><p>Pool, Fußball, Bewegungsraum, Garten</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">16:00</div><div class="tl-dot"></div><div class="tl-content"><h4>🌙 Spätdienst</h4><p>Bis 17:00 Uhr für berufstätige Eltern</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GRUPPENSTRUKTUR & ELTERNARBEIT -->
+<section class="section" id="gruppen">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Gruppenstruktur & Elternarbeit</div>
+      <h2>Gemeinschaft & Familie</h2>
+    </div>
+    <div class="gruppen-eltern">
+      <div class="ge-box reveal">
+        <h3>👨‍👩‍👧 Gruppenstruktur</h3>
+        <p>Bis zu <strong>80 Kinder</strong> werden bei uns liebevoll betreut – aufgeteilt in fünf altersgerechte Gruppen mit hohem Betreuungsschlüssel:</p>
+        <ul>
+          <li><strong>Krippe „Elefant"</strong> – 6 Mon.–3 J. · max. 10 · 3 Fachkräfte</li>
+          <li><strong>Krippe „Schildkröte"</strong> – 6 Mon.–3 J. · max. 10 · 3 Fachkräfte</li>
+          <li><strong>Elementar „Tiger"</strong> – 3–5 J. · max. 20 · 4 Fachkräfte</li>
+          <li><strong>Elementar „Affe"</strong> – 3–5 J. · max. 20 · 4 Fachkräfte</li>
+          <li><strong>Vorschule „Waran"</strong> – 5–7 J. · max. 20 · 4 Fachkräfte</li>
+        </ul>
+      </div>
+      <div class="ge-box reveal reveal-delay-1">
+        <h3>🤝 Elternarbeit</h3>
+        <p>Wir sehen Eltern <strong>nicht als Kunden, sondern als feste Partner</strong> im Team. Auf einer Insel wie Koh Samui ist familiäres Umfeld extrem wichtig.</p>
+        <ul>
+          <li>Kita-App für tägliche Updates, Fotos & Videos</li>
+          <li>Eingewöhnung nach dem Berliner Modell</li>
+          <li>Monatlicher Eltern-Workshop (Themenabende, Strand-Grillen)</li>
+          <li>„Briefkasten der Wünsche" für Mitwirkung</li>
+          <li>Tür-und-Angel-Gespräche beim Bringen & Abholen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BILD VOM KIND & PÄDAGOGIK -->
+<section class="section" id="paedagogik" style="background:var(--sand)">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Bild vom Kind & Pädagogisches Konzept</div>
+      <h2>Unsere Pädagogik</h2>
+    </div>
+    <div class="paed-grid">
+      <div>
+        <p class="lead" style="margin-bottom:1.5rem">Unser Ansatz verbindet das <strong>teiloffene Konzept</strong> mit Reggio-Einflüssen, drei Sprachen und tropischer Lebensrealität.</p>
+        <div class="konzept-list">
+          <div class="konzept-item reveal">
+            <div class="konzept-icon">🌱</div>
+            <div><h4>Teiloffenes Konzept</h4><p>Feste Gruppe als Ankerpunkt – tagsüber öffnen sich die Funktionsräume für selbstbestimmte Entscheidungen.</p></div>
+          </div>
+          <div class="konzept-item reveal reveal-delay-1">
+            <div class="konzept-icon">🌍</div>
+            <div><h4>Trilingual ohne Druck</h4><p>Deutsch, Englisch und Thai – die Kinder lernen alle Sprachen natürlich beim Spielen, Essen und Streiten.</p></div>
+          </div>
+          <div class="konzept-item reveal reveal-delay-2">
+            <div class="konzept-icon">🏛️</div>
+            <div><h4>Reggio – Der Raum als 3. Erzieher</h4><p>Spiegel, Lichtverhältnisse und Naturmaterialien von der Insel laden zum Mitmachen ein.</p></div>
+          </div>
+          <div class="konzept-item reveal">
+            <div class="konzept-icon">🧘</div>
+            <div><h4>Achtsamkeit & Klima-Balance</h4><p>Meditationsraum, Kinderyoga und Traumreisen helfen, das tropische Klima zu verarbeiten.</p></div>
+          </div>
+          <div class="konzept-item reveal reveal-delay-1">
+            <div class="konzept-icon">♿</div>
+            <div><h4>Inklusion als Grundhaltung</h4><p>Heilerziehungspflegerinnen, integrative Zusatzausbildung und externe Fachkräfte – Vielfalt ist Bereicherung.</p></div>
+          </div>
+          <div class="konzept-item reveal reveal-delay-2">
+            <div class="konzept-icon">🛡️</div>
+            <div><h4>Kinderschutz nach § 8a SGB VIII</h4><p>Schriftliches Kinderschutzkonzept, jährliche Schulungen, erweitertes Führungszeugnis, benannte Kinderschutzbeauftragte.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="bild-vom-kind reveal reveal-delay-1">
+        <h3>Unser Bild vom Kind 🌟</h3>
+        <p>Bei uns steht das Kind im Mittelpunkt. Wir glauben nicht, dass wir den Kindern die Welt erklären müssen – denn sie entdecken sie selbst.</p>
+        <p><strong style="color:var(--warm)">Kinder als kleine Forscher.</strong> Jedes Kind kommt mit einer riesigen Neugier auf die Welt. Wir fördern diesen Drang.</p>
+        <p><strong style="color:var(--warm)">Die 100 Sprachen (Reggio).</strong> Ein Kind drückt sich durch Malen, Bauen, Sport, Tanzen oder Singen aus – wir bieten für jede „Sprache" das richtige Material.</p>
+        <p><strong style="color:var(--warm)">Recht auf Fehler.</strong> Nur wer hinfällt, lernt, wie man wieder aufsteht. Das stärkt die Selbstwirksamkeit fürs ganze Leben.</p>
+        <p><strong style="color:var(--warm)">Partizipation.</strong> Im wöchentlichen Kinder-Parlament zählt jede Stimme – auch Krippenkinder werden altersgerecht einbezogen.</p>
+        <div class="bild-tags">
+          <span class="bild-tag">Kompetent</span>
+          <span class="bild-tag">Neugierig</span>
+          <span class="bild-tag">Kreativ</span>
+          <span class="bild-tag">Selbstbestimmt</span>
+          <span class="bild-tag">Einzigartig</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VORSCHULFÖRDERUNG -->
+<section class="section vorschul" id="vorschul">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Vorschulförderung</div>
+      <h2>Lernen mit Kokosnuss & JetSki</h2>
+      <p class="lead">Die Vorschulkinder suchen sich große Themen selbst aus – wir verknüpfen sie mit Mathe, Sprache und tropischer Lebensrealität.</p>
+    </div>
+    <div class="vorschul-grid">
+      <div class="vs-card reveal">
+        <div class="vs-icon">🚤</div>
+        <div>
+          <h3>Projektorientiertes Lernen</h3>
+          <p>Wenn Kinder wissen wollen, wie ein JetSki funktioniert, gehen wir zum Anleger. Physik und Mathe direkt am echten Objekt: Wie viel tankt man? Wie schnell ist der JetSki?</p>
+        </div>
+      </div>
+      <div class="vs-card reveal reveal-delay-1">
+        <div class="vs-icon">🏖️</div>
+        <div>
+          <h3>Mathe & Deutsch am Strand</h3>
+          <p>Wir schreiben Buchstaben in den Sand und nutzen Muscheln oder Kokosnüsse, um Mengen und Zahlen zu verstehen.</p>
+        </div>
+      </div>
+      <div class="vs-card reveal reveal-delay-2">
+        <div class="vs-icon">🇹🇭</div>
+        <div>
+          <h3>Thailändische Schriftzeichen</h3>
+          <p>Kinder lernen ihren Namen auf Deutsch und ein paar thailändische Schriftzeichen – Respekt vor der lokalen Kultur ist uns wichtig.</p>
+        </div>
+      </div>
+      <div class="vs-card reveal reveal-delay-3">
+        <div class="vs-icon">👶</div>
+        <div>
+          <h3>Verantwortung übernehmen</h3>
+          <p>Die Großen helfen den Kleineren beim Essen oder organisieren kleine Events – das bereitet sie perfekt auf den Schulalltag vor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KOOPERATION / SOZIALRAUM -->
+<section class="section koop" id="koop">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Kooperationspartner im Sozialraum</div>
+      <h2>Unser Netzwerk</h2>
+      <p class="lead">Wir arbeiten mit verschiedenen Institutionen zusammen, die für eine gesunde und ganzheitliche Entwicklung der Kinder förderlich sind.</p>
+    </div>
+    <div class="koop-grid">
+      <div class="koop-card reveal">
+        <div class="koop-icon">🏛️</div>
+        <h3>Gemeinden & Vereine</h3>
+        <p>Lokale Gemeinden und Vereine der Region unterstützen unsere Arbeit und Veranstaltungen.</p>
+      </div>
+      <div class="koop-card reveal reveal-delay-1">
+        <div class="koop-icon">🚒</div>
+        <h3>Polizei, Feuerwehr & Rettung</h3>
+        <p>Regelmäßige Besuche und Sicherheitsworkshops für Kinder und Personal.</p>
+      </div>
+      <div class="koop-card reveal reveal-delay-2">
+        <div class="koop-icon">🩺</div>
+        <h3>Zahnarzt & Ärzte</h3>
+        <p>Vorsorge, Aufklärung und enge Kooperation mit Bangkok Hospital Samui für medizinische Notfälle.</p>
+      </div>
+      <div class="koop-card reveal">
+        <div class="koop-icon">🎓</div>
+        <h3>Fachdienste</h3>
+        <p>Schwimmtrainer, Sprachförderung, Musiklehrer, Logopädie, Ergotherapie – alles vor Ort verfügbar.</p>
+      </div>
+      <div class="koop-card reveal reveal-delay-1">
+        <div class="koop-icon">👨‍👩‍👧</div>
+        <h3>Eltern & Vormunde</h3>
+        <p>Aktive Mitgestaltung im Kita-Alltag, Workshops und gemeinsame Projekte.</p>
+      </div>
+      <div class="koop-card reveal reveal-delay-2">
+        <div class="koop-icon">🕉️</div>
+        <h3>Senioren & Spirituelle</h3>
+        <p>Generationenübergreifende Begegnungen und Einbindung lokaler thailändischer Kultur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HSV STÜTZPUNKT -->
+<section class="section hsv-section">
+  <div class="section-inner">
+    <div class="hsv-content reveal">
+      <div class="hsv-badge">⚽ Offizieller HSV-Stützpunkt</div>
+      <h2>Hamburger SV<br>Partnerstandort Ko Samui</h2>
+      <p>Unsere Kita ist offizieller Partnerstandort des Hamburger SV. Wir arbeiten nach den Trainingsleitfäden des HSV-Nachwuchsbereichs.</p>
+      <p><strong style="color:var(--warm)">Zweimal im Jahr</strong> kommen Jugendtrainer*innen aus Hamburg zu uns auf die Insel, um exklusive Trainingscamps mit Kindern und Team durchzuführen.</p>
+      <p style="font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--warm);margin-top:1.5rem">"In den Farben getrennt – im Sport vereint."</p>
+    </div>
+  </div>
+</section>
+
+<!-- SONSTIGES -->
+<section class="section sonstiges">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Was uns besonders macht</div>
+      <h2>Sonstiges</h2>
+    </div>
+    <div class="son-grid">
+      <div class="son-card reveal">
+        <div class="si">🏊</div>
+        <h3>Wassersicherheit</h3>
+        <p>Direkt am Meer mit eigenem Pool – fest angestellte Schwimmtrainer bieten regelmäßig Wassergewöhnung und Schwimmkurse an.</p>
+      </div>
+      <div class="son-card reveal reveal-delay-1">
+        <div class="si">🥭</div>
+        <h3>Eigener Nutzgarten</h3>
+        <p>Tropische Früchte und Kräuter wachsen bei uns. Kinder helfen bei Pflege und Ernte, die Hauswirtschaft macht daraus frische Mahlzeiten.</p>
+      </div>
+      <div class="son-card reveal reveal-delay-2">
+        <div class="si">🛺</div>
+        <h3>Abenteuer-Logistik</h3>
+        <p>Kita-Boot, Kita-Bus, JetSki oder TukTuk – wir sind für Ausflüge auf Nachbarinseln oder Koh Samui bestens ausgestattet.</p>
+      </div>
+      <div class="son-card reveal">
+        <div class="si">🌪️</div>
+        <h3>Sicherheit bei jedem Wetter</h3>
+        <p>Für die Monsunzeit haben wir einen speziell zertifizierten Schutzraum – sicher und mit Spielfläche.</p>
+      </div>
+      <div class="son-card reveal reveal-delay-1">
+        <div class="si">💆</div>
+        <h3>Wellness fürs Team</h3>
+        <p>Eigener Wellnessbereich für Mitarbeiter*innen – damit unser Team voller Energie für die Kinder da sein kann.</p>
+      </div>
+      <div class="son-card reveal reveal-delay-2">
+        <div class="si">♻️</div>
+        <h3>Nachhaltigkeit am Meer</h3>
+        <p>Strandaufräum-Aktionen, Plastikvermeidung, Regenwasser-Aufbereitung. Die Kinder lernen früh: Ihr Handeln beeinflusst das Paradies.</p>
+      </div>
+      <div class="son-card reveal">
+        <div class="si">🤝</div>
+        <h3>Interkultureller Austausch</h3>
+        <p>Freundschaftsspiele gegen lokale thailändische Jugendteams – Sport verbindet thailändische und internationale Kinder.</p>
+      </div>
+      <div class="son-card reveal reveal-delay-1">
+        <div class="si">🍽️</div>
+        <h3>Frische Küche & Hauswirtschaft</h3>
+        <p>Hauseigene Küche, Hauswirtschaftskräfte und Gärtner sorgen täglich für gesunde, frische Mahlzeiten aus dem Nutzgarten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="section kontakt" id="kontakt">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="tag">Kontakt & Anmeldung</div>
+      <h2>Wir freuen uns auf euch!</h2>
+      <p class="lead">Habt ihr Fragen oder möchtet ihr euer Kind anmelden? Meldet euch gerne.</p>
+    </div>
+    <div class="kontakt-grid">
+      <div class="reveal">
+        <div class="k-item">
+          <div class="k-icon">📍</div>
+          <div><h4>Adresse</h4><p>Maenam Beach Road 47<br>Maenam, Ko Samui 84330, Thailand</p></div>
+        </div>
+        <div class="k-item">
+          <div class="k-icon">📞</div>
+          <div><h4>Telefon</h4><p><a href="tel:+66077456789">+66 (0) 77 456 789</a></p></div>
+        </div>
+        <div class="k-item">
+          <div class="k-icon">✉️</div>
+          <div><h4>E-Mail</h4><p><a href="mailto:info@little-explorers-kohsamui.com">info@little-explorers-kohsamui.com</a></p></div>
+        </div>
+        <div class="k-item">
+          <div class="k-icon">🌐</div>
+          <div><h4>Website</h4><p>www.little-explorers-kohsamui.com</p></div>
+        </div>
+        <div class="k-item">
+          <div class="k-icon">👤</div>
+          <div><h4>Anmeldung</h4><p><strong>Keno Weber</strong><br>Mo–Fr 08:00–14:00 Uhr erreichbar</p></div>
+        </div>
+      </div>
+      <div class="contact-cta reveal reveal-delay-1">
+        <div>
+          <h3>Schnuppern & Kennenlernen 🌺</h3>
+          <p style="margin-top:1rem">Wir laden euch herzlich zu einem kostenlosen Schnupperbesuch ein! Lernt das Team und die Räume kennen, lasst euer Kind erste Eindrücke sammeln.</p>
+          <p>Schreibt uns einfach – wir melden uns innerhalb von 24 Stunden.</p>
+        </div>
+        <a href="mailto:info@little-explorers-kohsamui.com" class="cta-btn">Termin anfragen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Little <span>Explorers</span> Ko Samui</div>
+      <p>Maenam Beach Road 47 · Ko Samui 84330 · Thailand</p>
+    </div>
+    <p style="text-align:right">info@little-explorers-kohsamui.com<br>+66 (0) 77 456 789<br><span style="opacity:.4;font-size:.78rem">© 2026 Little Explorers gGmbH</span></p>
+  </div>
+</footer>
+
+<script>
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
+  });
+}, { threshold: 0.08 });
+els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
